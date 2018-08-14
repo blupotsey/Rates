@@ -9,5 +9,11 @@
 import Foundation
 
 public struct Currency {
-    let symbol: String
+    public let symbol: String
+    public let name: String
+    
+    public init(symbol: String, name: String) {
+        self.symbol = symbol
+        self.name = name
+    }
 }

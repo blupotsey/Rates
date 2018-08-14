@@ -1,5 +1,5 @@
 //
-//  ExchangeRate.swift
+//  FixerCurrencyConverterError.swift
 //  CurrencyConverter
 //
 //  Created by Borbas, Adam on 2018. 08. 14..
@@ -8,8 +8,7 @@
 
 import Foundation
 
-public struct ExchangeRate {
-    public let base: CurrencyInfo
-    public let target: CurrencyInfo
-    public let rate: Double
+enum FixerCurrencyConverterError: Error {
+    case invalidJSON
+    case networkError(Error)
 }

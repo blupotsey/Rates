@@ -9,6 +9,9 @@
 import Foundation
 import Alamofire
 
+/**
+ `CurrencyConverter` implementation using Fixer.io service.
+ */
 public class FixerCurrencyConverter: CurrencyConverter {
     private let apiKey: String
     private lazy var dateFormatter: DateFormatter = {
@@ -17,7 +20,7 @@ public class FixerCurrencyConverter: CurrencyConverter {
         return dateFormatter
     }()
     
-    private static let defaultSymbol = "GBP"
+    private static let defaultSymbol = "EUR"
     
     private var defaultParameters: Parameters {
         return [

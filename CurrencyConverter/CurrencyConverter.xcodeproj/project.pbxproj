@@ -109,7 +109,7 @@
 		12E85B48212353150053283C /* CurrencyConverter */ = {
 			isa = PBXGroup;
 			children = (
-				12E85B59212355FA0053283C /* Fixer.io */,
+				12E85B59212355FA0053283C /* FixerCurrencyConverter */,
 				12E85B512123532A0053283C /* CurrencyConverter */,
 				12E85B4A212353150053283C /* Info.plist */,
 			);
@@ -127,14 +127,14 @@
 			path = CurrencyConverter;
 			sourceTree = "<group>";
 		};
-		12E85B59212355FA0053283C /* Fixer.io */ = {
+		12E85B59212355FA0053283C /* FixerCurrencyConverter */ = {
 			isa = PBXGroup;
 			children = (
 				1219B0A921235DD300BB30D4 /* Tests */,
 				12E85B5A212356130053283C /* FixerCurrencyConverter.swift */,
 				121F0AC1212361CB006660CF /* FixerCurrencyConverterError.swift */,
 			);
-			path = Fixer.io;
+			path = FixerCurrencyConverter;
 			sourceTree = "<group>";
 		};
 		B71E8D93A3050A232BE1986D /* Pods */ = {

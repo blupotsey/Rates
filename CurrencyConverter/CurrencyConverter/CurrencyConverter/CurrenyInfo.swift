@@ -10,4 +10,8 @@ import Foundation
 
 public struct CurrencyInfo {
     public let symbol: String
+    
+    public init(symbol: String) {
+        self.symbol = symbol
+    }
 }

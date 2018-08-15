@@ -5,6 +5,12 @@
       location = "group:CurrencyConverter/CurrencyConverter.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:CurrencyConverter/../Rates/Rates.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Rates/Rates.xcodeproj">
    </FileRef>
 </Workspace>

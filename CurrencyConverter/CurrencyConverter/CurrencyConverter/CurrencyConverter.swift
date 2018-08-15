@@ -15,8 +15,8 @@ public protocol CurrencyConverter {
     func supportedCurrencies(_ completionHandler: @escaping ([Currency]?, Error?) -> Void)
     
     /// Returns the latest exchange rates for a given `Currency`.
-    func latestRates(for currency: Currency?, _ completionHandler: @escaping ([ExchangeRate]?, Error?) -> Void)
+    func latestRates(for currency: CurrencyInfo?, _ completionHandler: @escaping ([ExchangeRate]?, Error?) -> Void)
     
     /// Returns the historical exchange rates for a given `Currency` at a given `Date`.
-    func historicalRates(for currency: Currency?, at date: Date, _ completionHandler: @escaping ([ExchangeRate]?, Error?) -> Void)
+    func historicalRates(for currency: CurrencyInfo?, at date: Date, _ completionHandler: @escaping ([ExchangeRate]?, Error?) -> Void)
 }

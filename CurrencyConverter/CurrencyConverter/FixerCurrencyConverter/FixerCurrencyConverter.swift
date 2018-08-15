@@ -57,7 +57,7 @@ public class FixerCurrencyConverter: CurrencyConverter {
         }
     }
     
-    public func latestRates(for currency: Currency? = nil, _ completionHandler: @escaping ([ExchangeRate]?, Error?) -> Void) {
+    public func latestRates(for currency: CurrencyInfo? = nil, _ completionHandler: @escaping ([ExchangeRate]?, Error?) -> Void) {
         let url = API.baseURL.appendingPathComponent(API.Path.latest)
         var parameters = self.defaultParameters
         if let currency = currency {
@@ -68,7 +68,7 @@ public class FixerCurrencyConverter: CurrencyConverter {
         self.consumeRatesDataRequest(baseCurrency: currency, dataRequest, completionHandler)
     }
     
-    public func historicalRates(for currency: Currency? = nil, at date: Date, _ completionHandler: @escaping ([ExchangeRate]?, Error?) -> Void) {
+    public func historicalRates(for currency: CurrencyInfo? = nil, at date: Date, _ completionHandler: @escaping ([ExchangeRate]?, Error?) -> Void) {
         let url = API.baseURL.appendingPathComponent(self.dateFormatter.string(from: date))
         var parameters = self.defaultParameters
         if let currency = currency {
@@ -79,7 +79,7 @@ public class FixerCurrencyConverter: CurrencyConverter {
         self.consumeRatesDataRequest(baseCurrency: currency , dataRequest, completionHandler)
     }
     
-    private func consumeRatesDataRequest(baseCurrency: Currency? = nil, _ dataRequest: DataRequest, _ completionHandler: @escaping ([ExchangeRate]?, Error?) -> Void) {
+    private func consumeRatesDataRequest(baseCurrency: CurrencyInfo? = nil, _ dataRequest: DataRequest, _ completionHandler: @escaping ([ExchangeRate]?, Error?) -> Void) {
         dataRequest.responseJSON { response in
             switch response.result {
             case .success(let rawJSON):

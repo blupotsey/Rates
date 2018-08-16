@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		12036A4321249E9C0082B7B3 /* LiveConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12036A4221249E9C0082B7B3 /* LiveConverterViewController.swift */; };
 		12036A4521249EAC0082B7B3 /* LiveConverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12036A4421249EAC0082B7B3 /* LiveConverterViewModel.swift */; };
+		1206B7742125E87D00A04507 /* CurrencySelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206B7732125E87D00A04507 /* CurrencySelectorViewController.swift */; };
 		128FAE252124A1840005942B /* CurrencyConverter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 128FAE242124A1840005942B /* CurrencyConverter.framework */; };
 		128FAE262124A1840005942B /* CurrencyConverter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 128FAE242124A1840005942B /* CurrencyConverter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		128FAE292124A38D0005942B /* ConversionRateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128FAE282124A38D0005942B /* ConversionRateTableViewCell.swift */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		12036A4221249E9C0082B7B3 /* LiveConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveConverterViewController.swift; sourceTree = "<group>"; };
 		12036A4421249EAC0082B7B3 /* LiveConverterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveConverterViewModel.swift; sourceTree = "<group>"; };
+		1206B7732125E87D00A04507 /* CurrencySelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySelectorViewController.swift; sourceTree = "<group>"; };
 		128FAE242124A1840005942B /* CurrencyConverter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CurrencyConverter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		128FAE282124A38D0005942B /* ConversionRateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionRateTableViewCell.swift; sourceTree = "<group>"; };
 		128FAE2A2124A4A40005942B /* AmountConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountConversion.swift; sourceTree = "<group>"; };
@@ -82,11 +84,12 @@
 			path = LiveConverter;
 			sourceTree = "<group>";
 		};
-		12036A4121249E7C0082B7B3 /* Currencies */ = {
+		12036A4121249E7C0082B7B3 /* CurrencySelector */ = {
 			isa = PBXGroup;
 			children = (
+				1206B7732125E87D00A04507 /* CurrencySelectorViewController.swift */,
 			);
-			path = Currencies;
+			path = CurrencySelector;
 			sourceTree = "<group>";
 		};
 		12E85B5C2123580D0053283C = {
@@ -111,7 +114,7 @@
 		12E85B672123580D0053283C /* Rates */ = {
 			isa = PBXGroup;
 			children = (
-				12036A4121249E7C0082B7B3 /* Currencies */,
+				12036A4121249E7C0082B7B3 /* CurrencySelector */,
 				12036A4021249E700082B7B3 /* LiveConverter */,
 				12036A3C21248BDA0082B7B3 /* HistoricalRates */,
 				12E85B682123580D0053283C /* AppDelegate.swift */,
@@ -255,6 +258,7 @@
 			files = (
 				128FAE2B2124A4A40005942B /* AmountConversion.swift in Sources */,
 				12E85B692123580D0053283C /* AppDelegate.swift in Sources */,
+				1206B7742125E87D00A04507 /* CurrencySelectorViewController.swift in Sources */,
 				12036A4521249EAC0082B7B3 /* LiveConverterViewModel.swift in Sources */,
 				128FAE292124A38D0005942B /* ConversionRateTableViewCell.swift in Sources */,
 				12036A4321249E9C0082B7B3 /* LiveConverterViewController.swift in Sources */,

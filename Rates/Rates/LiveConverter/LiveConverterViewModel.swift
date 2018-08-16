@@ -10,7 +10,7 @@ import Foundation
 import CurrencyConverter
 
 class LiveConverterViewModel {
-    private let currencyConverter: CurrencyConverter
+    let currencyConverter: CurrencyConverter
     
     var baseAmount: Double = 1.0
     lazy var baseCurrency: CurrencyInfo = {

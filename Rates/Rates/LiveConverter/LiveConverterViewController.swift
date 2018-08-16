@@ -41,6 +41,13 @@ class LiveConverterViewController: UIViewController {
         self.loadRates()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SelectCurrencySegue" {
+            let currencySelectorVC = (segue.destination as! UINavigationController).viewControllers.first! as! CurrencySelectorViewController
+            currencySelectorVC.currencyConverter = self.viewModel.currencyConverter
+        }
+    }
+    
     // MARK: - Private functions
     private func loadRates() {
         self.activityIndicator.startAnimating()

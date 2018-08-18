@@ -10,12 +10,17 @@ import Foundation
 import UIKit
 import CurrencyConverter
 
+protocol CurrencySelectorDelegate: class {
+    func currencySelected(_ currency: Currency)
+}
+
 class CurrencySelectorViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Properties
+    weak var delegate: CurrencySelectorDelegate?
     var currencyConverter: CurrencyConverter!
     private var currencies = [Currency]()
     
@@ -70,5 +75,13 @@ extension CurrencySelectorViewController: UITableViewDataSource {
         cell.detailTextLabel?.text = currency.name
         
         return cell
+    }
+}
+
+extension CurrencySelectorViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCurrency = self.currencies[indexPath.row]
+        self.delegate?.currencySelected(selectedCurrency)
+        self.dismiss(animated: true)
     }
 }

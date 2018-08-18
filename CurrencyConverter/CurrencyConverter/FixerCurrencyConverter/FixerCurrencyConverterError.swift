@@ -11,4 +11,21 @@ import Foundation
 enum FixerCurrencyConverterError: Error {
     case invalidJSON
     case networkError(Error)
+    case serviceError(FixerServiceError)
 }
+
+extension FixerCurrencyConverterError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .invalidJSON:
+            return "Please try again later."
+            
+        case .networkError(let error):
+            return error.localizedDescription
+            
+        case .serviceError(let error):
+            return error.type
+        }
+    }
+}
+

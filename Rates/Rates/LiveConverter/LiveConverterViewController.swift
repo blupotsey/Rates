@@ -16,7 +16,8 @@ class LiveConverterViewController: UIViewController {
     @IBOutlet weak var baseAmountTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var doneButton: NSLayoutConstraint!
+    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var historyButton: UIBarButtonItem!
     
     // MARK: - Properties
     private let viewModel = LiveConverterViewModel()
@@ -26,8 +27,7 @@ class LiveConverterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = self.viewModel.baseCurrency.symbol
-        self.loadRates()
+        self.currencyChanged()
     }
     
     // MARK: - Actions
@@ -45,12 +45,18 @@ class LiveConverterViewController: UIViewController {
         if segue.identifier == "SelectCurrencySegue" {
             let currencySelectorVC = (segue.destination as! UINavigationController).viewControllers.first! as! CurrencySelectorViewController
             currencySelectorVC.currencyConverter = self.viewModel.currencyConverter
+            currencySelectorVC.delegate = self
         }
     }
     
     // MARK: - Private functions
     private func loadRates() {
-        self.activityIndicator.startAnimating()
+        DispatchQueue.main.async {
+            self.activityIndicator.startAnimating()
+            self.doneButton.isEnabled = false
+            self.historyButton.isEnabled = false
+        }
+        
         self.viewModel.conversions { (conversions, error) in
             defer { DispatchQueue.main.async { self.activityIndicator.stopAnimating() }}
             
@@ -59,8 +65,13 @@ class LiveConverterViewController: UIViewController {
                 return
             }
             
-            self.conversions = conversions.sorted(by: { $0.targetSymbol < $1.targetSymbol})
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.conversions = conversions.sorted(by: { $0.targetSymbol < $1.targetSymbol})
+                self.tableView.reloadData()
+                
+                self.doneButton.isEnabled = true
+                self.historyButton.isEnabled = true
+            }
         }
     }
     
@@ -70,6 +81,16 @@ class LiveConverterViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default,handler: nil))
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func currencyChanged() {
+        DispatchQueue.main.async {
+            self.conversions.removeAll()
+            self.tableView.reloadData()
+            
+            self.navigationItem.title = self.viewModel.baseCurrency.symbol
+            self.loadRates()
+        }
     }
 }
 
@@ -88,5 +109,13 @@ extension LiveConverterViewController: UITableViewDataSource {
         let amountConversion = self.conversions[indexPath.row]
         cell.conversion = amountConversion
         return cell
+    }
+}
+
+extension LiveConverterViewController: CurrencySelectorDelegate {
+    func currencySelected(_ currency: Currency) {
+        self.viewModel.baseCurrency = currency.info
+        
+        self.currencyChanged()
     }
 }

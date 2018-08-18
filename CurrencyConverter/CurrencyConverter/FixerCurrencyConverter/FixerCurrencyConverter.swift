@@ -34,15 +34,15 @@ public class FixerCurrencyConverter: CurrencyConverter {
     
     public func supportedCurrencies(_ completionHandler: @escaping ([Currency]?, Error?) -> Void) {
         let url = API.baseURL.appendingPathComponent(API.Path.symbols)
+        let request = Alamofire.request(url, parameters: self.defaultParameters)
         
-        Alamofire.request(url, parameters: self.defaultParameters).responseJSON { response in
-            switch response.result {
-            case .success(let rawJSON):
-                guard let json = rawJSON as? [String: Any],
-                    let rawSymbols = json[API.Response.symbols] as? [String: String] else {
-                        print("Cannot parse symbols.")
-                        completionHandler(nil, FixerCurrencyConverterError.invalidJSON)
-                        return
+        self.sendFixerDataRequest(request) { result in
+            switch result {
+            case .success(let json):
+                guard let rawSymbols = json[API.Response.symbols] as? [String: String] else {
+                    print("Cannot parse symbols.")
+                    completionHandler(nil, FixerCurrencyConverterError.invalidJSON)
+                    return
                 }
                 
                 let symbols = rawSymbols.map {(key, value) in
@@ -63,9 +63,9 @@ public class FixerCurrencyConverter: CurrencyConverter {
         if let currency = currency {
             parameters[API.Key.base] = currency.symbol
         }
-    
+        
         let dataRequest = Alamofire.request(url, parameters: parameters)
-        self.consumeRatesDataRequest(baseCurrency: currency, dataRequest, completionHandler)
+        self.sendRatesDataRequest(baseCurrency: currency, dataRequest, completionHandler)
     }
     
     public func historicalRates(for currency: CurrencyInfo? = nil, at date: Date, _ completionHandler: @escaping ([ExchangeRate]?, Error?) -> Void) {
@@ -76,18 +76,46 @@ public class FixerCurrencyConverter: CurrencyConverter {
         }
         
         let dataRequest = Alamofire.request(url, parameters: parameters)
-        self.consumeRatesDataRequest(baseCurrency: currency , dataRequest, completionHandler)
+        self.sendRatesDataRequest(baseCurrency: currency , dataRequest, completionHandler)
     }
     
-    private func consumeRatesDataRequest(baseCurrency: CurrencyInfo? = nil, _ dataRequest: DataRequest, _ completionHandler: @escaping ([ExchangeRate]?, Error?) -> Void) {
+    // MARK: - Private functions
+    
+    private func sendFixerDataRequest(_ dataRequest: DataRequest, _ completionHandler: @escaping (Alamofire.Result<[String: Any]>) -> Void) {
         dataRequest.responseJSON { response in
             switch response.result {
             case .success(let rawJSON):
-                guard let json = rawJSON as? [String: Any],
-                    let rawRates = json[API.Response.rates] as? [String: Double] else {
-                        print("Cannot parse rates.")
-                        completionHandler(nil, FixerCurrencyConverterError.invalidJSON)
-                        return
+                guard let json = rawJSON as? [String: Any] else {
+                    print("Not valid JSON")
+                    completionHandler(.failure(FixerCurrencyConverterError.invalidJSON))
+                    return
+                }
+                
+                if let rawError = json[API.Response.Error.error] as? [String: Any],
+                    let code = rawError[API.Response.Error.code] as? Int,
+                    let type = rawError[API.Response.Error.type] as? String {
+                    let serviceError = FixerServiceError(code: code, type: type)
+                    completionHandler(.failure(FixerCurrencyConverterError.serviceError(serviceError)))
+                    return
+                }
+                
+                completionHandler(.success(json))
+                
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
+    }
+    
+    private func sendRatesDataRequest(baseCurrency: CurrencyInfo? = nil, _ dataRequest: DataRequest, _ completionHandler: @escaping ([ExchangeRate]?, Error?) -> Void) {
+        
+        self.sendFixerDataRequest(dataRequest) { result in
+            switch result {
+            case .success(let json):
+                guard let rawRates = json[API.Response.rates] as? [String: Double] else {
+                    print("Cannot parse rates.")
+                    completionHandler(nil, FixerCurrencyConverterError.invalidJSON)
+                    return
                 }
                 
                 let rates = rawRates.map { (symbol, rate) -> ExchangeRate in
@@ -97,7 +125,7 @@ public class FixerCurrencyConverter: CurrencyConverter {
                 completionHandler(rates, nil)
                 
             case .failure(let error):
-                completionHandler(nil, FixerCurrencyConverterError.networkError(error))
+                completionHandler(nil, error)
             }
         }
     }
@@ -119,5 +147,11 @@ private enum API {
     enum Response {
         static let symbols = "symbols"
         static let rates = "rates"
+        
+        enum Error {
+            static let error = "error"
+            static let code = "code"
+            static let type = "type"
+        }
     }
 }

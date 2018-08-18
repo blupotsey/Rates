@@ -51,6 +51,7 @@
                                 <sections/>
                                 <connections>
                                     <outlet property="dataSource" destination="fSh-Th-z4n" id="HYy-px-wnV"/>
+                                    <outlet property="delegate" destination="fSh-Th-z4n" id="dg6-VX-DDP"/>
                                 </connections>
                             </tableView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4p8-zX-bMG">
@@ -163,11 +164,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="LGP-so-h6K" firstAttribute="centerY" secondItem="UbX-Pl-bOM" secondAttribute="centerY" id="1Cq-VX-KRD"/>
+                            <constraint firstItem="A0r-Nl-mbL" firstAttribute="baseline" secondItem="B0y-GP-trv" secondAttribute="baseline" id="3qH-vg-Wvw"/>
                             <constraint firstItem="UbX-Pl-bOM" firstAttribute="leading" secondItem="tK9-Qm-o60" secondAttribute="leading" id="7Ns-kv-5IF"/>
                             <constraint firstItem="tK9-Qm-o60" firstAttribute="bottom" secondItem="UbX-Pl-bOM" secondAttribute="bottom" id="A7d-Md-fp1"/>
                             <constraint firstItem="tK9-Qm-o60" firstAttribute="trailing" secondItem="A0r-Nl-mbL" secondAttribute="trailing" constant="16" id="a8G-q4-YY4"/>
                             <constraint firstItem="A0r-Nl-mbL" firstAttribute="leading" secondItem="B0y-GP-trv" secondAttribute="trailing" constant="16" id="co1-Fy-9ey"/>
-                            <constraint firstItem="A0r-Nl-mbL" firstAttribute="baseline" secondItem="B0y-GP-trv" secondAttribute="baseline" id="dI9-nC-eDL"/>
                             <constraint firstItem="B0y-GP-trv" firstAttribute="leading" secondItem="tK9-Qm-o60" secondAttribute="leading" constant="16" id="gHv-gk-8f1"/>
                             <constraint firstItem="B0y-GP-trv" firstAttribute="top" secondItem="tK9-Qm-o60" secondAttribute="top" constant="16" id="imJ-z7-rba"/>
                             <constraint firstItem="tK9-Qm-o60" firstAttribute="trailing" secondItem="UbX-Pl-bOM" secondAttribute="trailing" id="keV-gF-2Cn"/>
@@ -193,7 +194,8 @@
                     <connections>
                         <outlet property="activityIndicator" destination="LGP-so-h6K" id="cb8-UQ-RaH"/>
                         <outlet property="baseAmountTextField" destination="B0y-GP-trv" id="PNt-pd-jae"/>
-                        <outlet property="doneButton" destination="dI9-nC-eDL" id="c2Y-ed-hQZ"/>
+                        <outlet property="doneButton" destination="A0r-Nl-mbL" id="x4k-gS-EIc"/>
+                        <outlet property="historyButton" destination="ymP-s0-eWA" id="n0U-gc-rZy"/>
                         <outlet property="tableView" destination="UbX-Pl-bOM" id="5r8-9x-iAC"/>
                     </connections>
                 </viewController>

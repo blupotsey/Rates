@@ -46,6 +46,13 @@ class LiveConverterViewController: UIViewController {
             let currencySelectorVC = (segue.destination as! UINavigationController).viewControllers.first! as! CurrencySelectorViewController
             currencySelectorVC.currencyConverter = self.viewModel.currencyConverter
             currencySelectorVC.delegate = self
+            return
+        }
+        
+        if segue.identifier == "ShowHistorySegue" {
+            let currencyHistoryVC = (segue.destination as! UINavigationController).viewControllers.first! as! CurrencyHistoryViewController
+            currencyHistoryVC.currencyConverter = self.viewModel.currencyConverter
+            return
         }
     }
     

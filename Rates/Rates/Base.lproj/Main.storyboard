@@ -131,11 +131,14 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Bwo-Ke-vCd" firstAttribute="trailing" secondItem="6PI-TF-P4T" secondAttribute="trailingMargin" id="2Lx-hQ-Al4"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5d9-if-Huz" secondAttribute="trailing" constant="20" symbolic="YES" id="3rE-YZ-wBr"/>
                                                 <constraint firstItem="5d9-if-Huz" firstAttribute="top" secondItem="TMU-5M-ZdM" secondAttribute="bottom" id="3yK-qC-NY7"/>
                                                 <constraint firstItem="TMU-5M-ZdM" firstAttribute="leading" secondItem="6PI-TF-P4T" secondAttribute="leading" constant="16" id="JwG-72-0dS"/>
                                                 <constraint firstItem="TMU-5M-ZdM" firstAttribute="top" secondItem="6PI-TF-P4T" secondAttribute="top" constant="5" id="cnS-i2-BFV"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TMU-5M-ZdM" secondAttribute="trailing" constant="20" symbolic="YES" id="dCN-2Y-N52"/>
                                                 <constraint firstItem="Bwo-Ke-vCd" firstAttribute="centerY" secondItem="6PI-TF-P4T" secondAttribute="centerY" id="pyr-Ke-Wc0"/>
                                                 <constraint firstItem="5d9-if-Huz" firstAttribute="leading" secondItem="TMU-5M-ZdM" secondAttribute="leading" id="ur8-9p-Eud"/>
+                                                <constraint firstItem="Bwo-Ke-vCd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6PI-TF-P4T" secondAttribute="leadingMargin" id="xXB-Og-ffb"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -187,7 +190,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="History" id="ymP-s0-eWA">
                             <connections>
-                                <segue destination="T7z-m6-tCW" kind="show" id="fRM-C3-O24"/>
+                                <segue destination="Son-LQ-6om" kind="show" identifier="ShowHistorySegue" id="fRM-C3-O24"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -203,10 +206,10 @@
             </objects>
             <point key="canvasLocation" x="1168.8" y="-196.55172413793105"/>
         </scene>
-        <!--View Controller-->
+        <!--Currency History View Controller-->
         <scene sceneID="nqe-QP-rXX">
             <objects>
-                <viewController id="T7z-m6-tCW" sceneMemberID="viewController">
+                <viewController id="T7z-m6-tCW" customClass="CurrencyHistoryViewController" customModule="Rates" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TFG-5l-fNb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -219,12 +222,15 @@
                             </label>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-7" translatesAutoresizingMaskIntoConstraints="NO" id="L8m-H2-wIr">
                                 <rect key="frame" x="265" y="80" width="94" height="29"/>
+                                <connections>
+                                    <action selector="stepperChanged:" destination="T7z-m6-tCW" eventType="valueChanged" id="9WQ-O1-FVT"/>
+                                </connections>
                             </stepper>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="job-3Y-LNL">
                                 <rect key="frame" x="0.0" y="129" width="375" height="538"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="1xq-fs-dU9" detailTextLabel="SOx-vf-kGj" style="IBUITableViewCellStyleValue1" id="gIq-Fs-c10">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryRatesTableViewCell" textLabel="1xq-fs-dU9" detailTextLabel="SOx-vf-kGj" style="IBUITableViewCellStyleValue1" id="gIq-Fs-c10">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gIq-Fs-c10" id="V5O-EX-O59">
@@ -249,28 +255,48 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="T7z-m6-tCW" id="nlg-Uy-sWo"/>
+                                </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4YL-yr-ddN">
+                                <rect key="frame" x="0.0" y="388" width="375" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="MMT-yD-r2w" firstAttribute="baseline" secondItem="L8m-H2-wIr" secondAttribute="baseline" id="3Jb-OV-zrj"/>
                             <constraint firstItem="job-3Y-LNL" firstAttribute="leading" secondItem="pcD-44-I1W" secondAttribute="leading" id="6rO-7K-d27"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MMT-yD-r2w" secondAttribute="trailing" constant="20" symbolic="YES" id="Fsz-ir-T1R"/>
                             <constraint firstItem="pcD-44-I1W" firstAttribute="bottom" secondItem="job-3Y-LNL" secondAttribute="bottom" id="JJO-6w-rMZ"/>
                             <constraint firstItem="pcD-44-I1W" firstAttribute="trailing" secondItem="job-3Y-LNL" secondAttribute="trailing" id="Lg8-Ek-yXR"/>
                             <constraint firstItem="pcD-44-I1W" firstAttribute="trailing" secondItem="L8m-H2-wIr" secondAttribute="trailing" constant="16" id="MTY-RW-3zh"/>
                             <constraint firstItem="MMT-yD-r2w" firstAttribute="leading" secondItem="pcD-44-I1W" secondAttribute="leading" constant="16" id="YgZ-zr-0Gt"/>
+                            <constraint firstItem="4YL-yr-ddN" firstAttribute="centerY" secondItem="job-3Y-LNL" secondAttribute="centerY" id="izc-Ck-KJv"/>
+                            <constraint firstItem="4YL-yr-ddN" firstAttribute="leading" secondItem="job-3Y-LNL" secondAttribute="trailing" constant="-375" id="jU9-3t-DN7"/>
                             <constraint firstItem="job-3Y-LNL" firstAttribute="top" secondItem="L8m-H2-wIr" secondAttribute="bottom" constant="20" id="jxl-VF-BcL"/>
                             <constraint firstItem="L8m-H2-wIr" firstAttribute="top" secondItem="pcD-44-I1W" secondAttribute="top" constant="16" id="n4h-9V-gc8"/>
+                            <constraint firstItem="4YL-yr-ddN" firstAttribute="centerX" secondItem="job-3Y-LNL" secondAttribute="centerX" id="yMg-na-w7r"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pcD-44-I1W"/>
                     </view>
                     <navigationItem key="navigationItem" id="0zg-Ac-Tbw">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="R0m-NA-SYG"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="R0m-NA-SYG">
+                            <connections>
+                                <action selector="doneTapped:" destination="T7z-m6-tCW" id="nOm-OR-wVi"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="4YL-yr-ddN" id="oCs-rB-1Cg"/>
+                        <outlet property="dateLabel" destination="MMT-yD-r2w" id="7b1-uw-hxL"/>
+                        <outlet property="dateStepper" destination="L8m-H2-wIr" id="nhb-ed-QzJ"/>
+                        <outlet property="tableView" destination="job-3Y-LNL" id="hh4-Np-KOp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gls-2J-bnr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2028" y="-196"/>
+            <point key="canvasLocation" x="2967.1999999999998" y="-196.55172413793105"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="x5L-Pu-8DM">
@@ -307,6 +333,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ljp-uQ-QVo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1168.8" y="-935.08245877061472"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Yho-1v-45d">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Son-LQ-6om" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QEj-Bb-7Az">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="T7z-m6-tCW" kind="relationship" relationship="rootViewController" id="EPC-i8-fW1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7uj-hf-Fg1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2028" y="-196.55172413793105"/>
         </scene>
     </scenes>
 </document>

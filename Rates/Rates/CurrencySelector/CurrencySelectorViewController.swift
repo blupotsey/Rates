@@ -69,7 +69,7 @@ extension CurrencySelectorViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "CurrencySelectorTableViewCell")!
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "CurrencySelectorTableViewCell", for: indexPath)
         let currency = self.currencies[indexPath.row]
         cell.textLabel?.text = currency.symbol
         cell.detailTextLabel?.text = currency.name

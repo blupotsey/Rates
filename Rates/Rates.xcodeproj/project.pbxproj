@@ -14,6 +14,7 @@
 		128FAE262124A1840005942B /* CurrencyConverter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 128FAE242124A1840005942B /* CurrencyConverter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		128FAE292124A38D0005942B /* ConversionRateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128FAE282124A38D0005942B /* ConversionRateTableViewCell.swift */; };
 		128FAE2B2124A4A40005942B /* AmountConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128FAE2A2124A4A40005942B /* AmountConversion.swift */; };
+		12DA1C9D212844B000C203E3 /* CurrencyHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DA1C9C212844B000C203E3 /* CurrencyHistoryViewController.swift */; };
 		12E85B692123580D0053283C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E85B682123580D0053283C /* AppDelegate.swift */; };
 		12E85B6E2123580D0053283C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12E85B6C2123580D0053283C /* Main.storyboard */; };
 		12E85B702123580E0053283C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12E85B6F2123580E0053283C /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 		128FAE242124A1840005942B /* CurrencyConverter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CurrencyConverter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		128FAE282124A38D0005942B /* ConversionRateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionRateTableViewCell.swift; sourceTree = "<group>"; };
 		128FAE2A2124A4A40005942B /* AmountConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountConversion.swift; sourceTree = "<group>"; };
+		12DA1C9C212844B000C203E3 /* CurrencyHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyHistoryViewController.swift; sourceTree = "<group>"; };
 		12E85B652123580D0053283C /* Rates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rates.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12E85B682123580D0053283C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		12E85B6D2123580D0053283C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -92,6 +94,14 @@
 			path = CurrencySelector;
 			sourceTree = "<group>";
 		};
+		12DA1C9B2128446000C203E3 /* Histroy */ = {
+			isa = PBXGroup;
+			children = (
+				12DA1C9C212844B000C203E3 /* CurrencyHistoryViewController.swift */,
+			);
+			path = Histroy;
+			sourceTree = "<group>";
+		};
 		12E85B5C2123580D0053283C = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +124,7 @@
 		12E85B672123580D0053283C /* Rates */ = {
 			isa = PBXGroup;
 			children = (
+				12DA1C9B2128446000C203E3 /* Histroy */,
 				12036A4121249E7C0082B7B3 /* CurrencySelector */,
 				12036A4021249E700082B7B3 /* LiveConverter */,
 				12036A3C21248BDA0082B7B3 /* HistoricalRates */,
@@ -258,6 +269,7 @@
 			files = (
 				128FAE2B2124A4A40005942B /* AmountConversion.swift in Sources */,
 				12E85B692123580D0053283C /* AppDelegate.swift in Sources */,
+				12DA1C9D212844B000C203E3 /* CurrencyHistoryViewController.swift in Sources */,
 				1206B7742125E87D00A04507 /* CurrencySelectorViewController.swift in Sources */,
 				12036A4521249EAC0082B7B3 /* LiveConverterViewModel.swift in Sources */,
 				128FAE292124A38D0005942B /* ConversionRateTableViewCell.swift in Sources */,

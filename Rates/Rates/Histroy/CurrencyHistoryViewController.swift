@@ -21,6 +21,7 @@ class CurrencyHistoryViewController: UIViewController {
     // MARK: - Properties
     var currencyConverter: CurrencyConverter!
     var currencyInfo: CurrencyInfo!
+    private var verticalOffset: CGFloat?
     private var date: Date = Date()
     private var rates = [ExchangeRate]()
     private lazy var dateFormatter: DateFormatter = {
@@ -67,6 +68,10 @@ class CurrencyHistoryViewController: UIViewController {
                 self.rates = rates.sorted(by: { $0.target.symbol < $1.target.symbol })
                 self.tableView.reloadData()
                 self.dateStepper.isEnabled = true
+                
+                if let offset = self.verticalOffset {
+                    self.tableView.contentOffset = CGPoint(x: 0, y: offset)
+                }
             }
         }
     }
@@ -76,12 +81,15 @@ class CurrencyHistoryViewController: UIViewController {
     }
     
     fileprivate func dateChanged() {
-        self.date = Calendar.current.date(byAdding: .day, value: Int(self.dateStepper.value), to: Date())!
-        self.dateLabel.text = self.dateFormatter.string(from: self.date)
-        self.rates.removeAll()
-        self.tableView.reloadData()
-        
-        self.loadRates()
+        DispatchQueue.main.async {
+            self.verticalOffset = self.tableView.contentOffset.y
+            self.date = Calendar.current.date(byAdding: .day, value: Int(self.dateStepper.value), to: Date())!
+            self.dateLabel.text = self.dateFormatter.string(from: self.date)
+            self.rates.removeAll()
+            self.tableView.reloadData()
+            
+            self.loadRates()
+        }
     }
 }
 

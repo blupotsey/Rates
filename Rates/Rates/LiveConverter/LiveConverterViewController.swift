@@ -121,6 +121,8 @@ extension LiveConverterViewController: UITableViewDataSource {
 
 extension LiveConverterViewController: CurrencySelectorDelegate {
     func currencySelected(_ currency: Currency) {
+        self.viewModel.baseAmount = 1
+        self.baseAmountTextField.text = "\(Int(self.viewModel.baseAmount))"
         self.viewModel.baseCurrency = currency.info
         
         self.currencyChanged()

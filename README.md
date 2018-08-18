@@ -1,3 +1,7 @@
+
+### Note
+I have not found a free exchange rate service that supports changing the base currency. My solution defaults to EUR.
+
 # Task
 
 Develop a simple application which shows today’s exchange rates and is able to calculate currencies and can show historical currency rates for the last 7 days.
